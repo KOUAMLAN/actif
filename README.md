@@ -72,8 +72,8 @@ ohmyfood/
 2. Ouvrir les fichiers HTML dans un navigateur
 
 ## Liens
-- [Repository GitHub](#https://github.com/KOUAMLAN/ocprojet4)
-- [Version en ligne](#/KOUAMLAN.github.io/ohmyfood/)
+- [Repository GitHub](https://github.com/KOUAMLAN/projet4)
+- [Version en ligne]https://kouamlan.github.io/projet4/
 
 ## Contributeurs
 [EVLE KOUAMLAN]
