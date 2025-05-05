@@ -1,20 +1,56 @@
-// utils/_animations.scss
+// Loader animation
+@keyframes loader-spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
 
-// Keyframes for animations
+.loader {
+  border: 6px solid $background-light;
+  border-top: 6px solid $primary-color;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: loader-spin 1s linear infinite;
+  margin: 80px auto;
+}
+
+// Keyframes for menu items
 @keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
+  from { transform: translateX(100%); opacity: 0;}
+  to { transform: translateX(0); opacity: 1;}
+}
 
+// Animation progressive (entrées -> plats -> desserts)
+.menu-category--entrees .menu-item {
+  animation: slideInRight 0.5s ease forwards;
+  animation-delay: calc(var(--item-number) * 0.1s);
+}
+.menu-category--plats .menu-item {
+  animation: slideInRight 0.5s ease forwards;
+  animation-delay: calc(1s + var(--item-number) * 0.1s);
+}
+.menu-category--desserts .menu-item {
+  animation: slideInRight 0.5s ease forwards;
+  animation-delay: calc(2s + var(--item-number) * 0.1s);
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
   to {
-    transform: translateX(0);
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
-// Apply animation to menu items
-.menu-item {
-  animation: slideInRight 0.5s ease forwards;
-  animation-delay: calc(var(--item-number) * 0.1s);
+// Appliquez l’animation à chaque section avec un léger délai progressif
+.heros {
+  animation: fadeInUp 0.7s cubic-bezier(.72,-0.01,.19,.92) 0.2s both;
+}
+.fonctionnement {
+  animation: fadeInUp 0.7s cubic-bezier(.72,-0.01,.19,.92) 0.4s both;
+}
+.restaurants {
+  animation: fadeInUp 0.7s cubic-bezier(.72,-0.01,.19,.92) 0.6s both;
 }

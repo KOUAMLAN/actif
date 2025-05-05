@@ -1,5 +1,3 @@
-// components/_buttons.scss
-
 @import "../utils/mixins";
 @import "../utils/variables";
 
@@ -22,7 +20,6 @@
   }
 
   &--gradient {
-    @extend .btn;
     display: block;
     margin: $gap-large auto;
     width: fit-content;
