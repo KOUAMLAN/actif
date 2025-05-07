@@ -3,6 +3,7 @@
 @import "pages/restaurant";
 @import "pages/home";
 @import "utils/fixes";
+
 /* ===================== */
 /* Variables de couleur  */
 /* ===================== */
@@ -68,9 +69,9 @@ body {
 /* Commun Buttons        */
 /* ===================== */
 .btn, .btn--gradient {
-  display: block; /* le bouton prend toute la largeur disponible */
+  display: block;
   margin-left: auto;
-  margin-right: auto; /* centre horizontalement */
+  margin-right: auto;
   padding: 0.8rem 1.5rem;
   border-radius: 25px;
   font-weight: bold;
@@ -81,8 +82,8 @@ body {
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
-  text-align: center; /* centre le texte à l'intérieur du bouton */
-  width: fit-content; /* le bouton ne prend que la largeur de son contenu */
+  text-align: center;
+  width: fit-content;
 }
 
 .btn:hover, .btn--gradient:hover {
@@ -179,6 +180,7 @@ body {
   align-items: center;
   gap: 1rem;
   transition: box-shadow 0.3s, background 0.3s;
+  cursor: pointer;
 }
 .fonctionnement__steps li::before {
   counter-increment: step-counter;
@@ -199,6 +201,11 @@ body {
 .fonctionnement__steps li i {
   color: var(--icon-grey);
   transition: color 0.3s;
+}
+.fonctionnement__steps li:hover,
+.fonctionnement__steps li:focus {
+  background-color: #f1eafe;
+  box-shadow: 0 4px 16px rgba(147,86,220,0.15);
 }
 .fonctionnement__steps li:hover i,
 .fonctionnement__steps li:focus i {
@@ -272,7 +279,8 @@ body {
   color: var(--text-color-dark);
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;text-decoration: none; /* PAS de soulignement */
+  text-overflow: ellipsis;
+  text-decoration: none;
 }
 .card__subtitle {
   font-size: 1rem;
@@ -280,7 +288,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-decoration: none; /* PAS de soulignement */
+  text-decoration: none;
 }
 .card__title,
 .card__subtitle,
@@ -290,7 +298,6 @@ body {
 .menu-item__desc {
   text-decoration: none !important;
 }
-
 .card__title a,
 .card__subtitle a,
 .card__desc a,
@@ -331,7 +338,6 @@ body {
 .btn-like:hover .fas,
 .btn-like:focus .fas {
   opacity: 1;
-  
   animation: heart-pop 0.4s;
 }
 .btn-like:hover .far,
@@ -449,87 +455,73 @@ body {
 /* Menu Items            */
 /* ===================== */
 .menu-item {
-  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   margin-bottom: 15px;
   overflow: hidden;
-  display: flex;
   transition: box-shadow 0.3s;
   cursor: pointer;
-  height: 80px;
-  width: 100%;
-  max-width: 500px;
-  align-items: center;
-  position: relative;
-  animation: slideInRight 0.5s ease forwards;
 }
+
 .menu-item__content {
-  flex-grow: 1;
+  flex: 1 1 auto;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
-  position: relative;
-  width: calc(100% - 80px);
+  min-width: 0;
   transition: background 0.3s;
 }
-.menu-item__title,
-.menu-item__description {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-decoration: none; /* PAS de soulignement */
+
+.menu-item__right {
+  display: flex;
+  align-items: center;
+  width: 80px; /* largeur totale réservée pour prix + coche */
+  position: relative;
+  justify-content: flex-end;
 }
-.menu-item__title {
-  font-weight: 700;
-  font-size: 1.08rem;
-}
-.menu-item__description {
-  font-size: 0.97rem;
-  color: #555;
-  margin-left: 0;
-  padding-left: 10px;
-  width: 100%;
-}
+
 .menu-item__price {
   font-weight: bold;
-  padding: 10px;
-  display: flex;
-  align-items: flex-end;
-  flex-shrink: 0;
-  width: 80px;
-  text-align: right;
-  transition: color 0.3s;
+  font-size: 1rem;
+  color: #353535;
+  transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+  margin-right: 0.5rem;
 }
+
 .menu-item__check {
   background-color: var(--tertiary-color);
-  width: 60px;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
-  border-radius: 0 15px 15px 0;
-}
-.menu-item:hover .menu-item__check,
-.menu-item:focus .menu-item__check {
-  transform: translateX(0);
-}
-.menu-item__check i {
-  color: #ffffff;
-  font-size: 1.2rem;
+  margin-left: -36px; /* cachée à gauche du prix */
+  opacity: 0;
+  transition: margin-left 0.3s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.3s;
 }
 
-/* Empêche le décalage du texte lors de l'apparition de la coche */
-.menu-item__content,
-.menu-item__price {
-  transition: background 0.3s;
+.menu-item:hover .menu-item__price,
+.menu-item:focus .menu-item__price {
+  transform: translateX(-36px);
+}
+
+.menu-item:hover .menu-item__check,
+.menu-item:focus .menu-item__check {
+  margin-left: 0;
+  opacity: 1;
+}
+
+.menu-item__check i {
+  color: #fff;
+  font-size: 1.1rem;
 }
 
 /* ===================== */
@@ -545,8 +537,6 @@ body {
     opacity: 1;
   }
 }
-
-/* Arrivée progressive par section */
 .menu-entrées .menu-item:nth-child(n) {
   animation-delay: calc(0.1s * (var(--i, 1)));
 }
@@ -625,5 +615,33 @@ body {
     max-width: 634px;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+/* Loader Overlay */
+#loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.98);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: loader-fadeout 0.8s 0.8s forwards;
+}
+
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 8px solid #eaeaea;
+  border-top: 8px solid #9356dc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes loader-fadeout {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 }
