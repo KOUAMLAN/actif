@@ -1,0 +1,115 @@
+.menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+  cursor: pointer;
+  position: relative;
+
+  &__content {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__title,
+  &__description,
+  &__desc {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0;
+    display: block;
+    text-decoration: none !important;
+    color: inherit;
+    max-width: 100%;
+  }
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #101010;
+  }
+  &__description,
+  &__desc {
+    font-size: 1rem;
+    color: #666;
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+    width: 80px;
+    justify-content: flex-end;
+    position: relative;
+    height: 100%;
+    transition: width 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+    overflow: visible;
+  }
+
+  // Effet bord droit bleu clair au survol
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px;
+    height: 100%;
+    border-radius: 0 15px 15px 0;
+    background: #99e2d0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 1;
+  }
+  &:hover::after,
+  &:focus::after {
+    opacity: 1;
+  }
+
+  // La coche reste visible sur le bleu clair
+  &__check {
+    width: 80px;
+    height: 100%;
+    border-radius: 0 15px 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0; top: 0;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    background: transparent;
+    transition: opacity 0.3s;
+    i {
+      color: #fff;
+      font-size: 1.3rem;
+    }
+  }
+  &:hover &__check,
+  &:focus &__check {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  &__price {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #353535;
+    margin-right: 0.5rem;
+    transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+    min-width: 0;
+    z-index: 3;
+  }
+  &:hover &__price,
+  &:focus &__price {
+    transform: translateX(-80px);
+  }
+}

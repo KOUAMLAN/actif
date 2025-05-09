@@ -1,12 +1,14 @@
 @import "../utils/variables";
-@import "../utils/mixins";
+@import "../components/menu-item";
 
+// Image d’en-tête du restaurant
 .restaurant-page__image {
   width: 100%;
   height: 275px;
   object-fit: cover;
 }
 
+// Bloc menu principal
 .menu {
   background-color: $background-light;
   border-radius: 40px 40px 0 0;
@@ -15,6 +17,22 @@
   padding: 32px 17px;
   max-width: 1055px;
   margin: -40px auto 0;
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-right: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    color: $dark-grey;
+    margin-right: 1rem;
+    font-family: $font-secondary;
+    font-size: 1.75rem;
+  }
 
   &__category {
     margin-bottom: 2rem;
@@ -25,12 +43,12 @@
       text-transform: uppercase;
       margin-bottom: 2rem;
       position: relative;
-      padding-left: 30px;
+      padding-left: 0;
 
       &::after {
         content: "";
         position: absolute;
-        left: 30px;
+        left: 0;
         bottom: -5px;
         width: 40px;
         height: 3px;
@@ -38,106 +56,22 @@
       }
     }
   }
-}
 
-.menu-category--entrees .menu-item { --item-number: 0; }
-.menu-category--plats .menu-item { --item-number: 0; }
-.menu-category--desserts .menu-item { --item-number: 0; }
-
-.menu-item {
-  background-color: $white;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
-  overflow: hidden;
-  display: flex;
-  transition: box-shadow 0.3s ease;
-  cursor: pointer;
-  height: 80px;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-
-  &__content {
-    flex-grow: 1;
-    padding: 10px;
+  &__items {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-    min-width: 0;
-
-    .menu-item__title {
-      font-weight: 500;
-      font-size: 1rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-decoration: none; /* PAS de soulignement */
-
-    }
-    .menu-item__desc {
-      font-size: 0.95rem;
-      color: #777;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-decoration: none; /* PAS de soulignement */
-    }
-  }
-
-  &__price {
-    font-weight: bold;
-    padding: 10px;
-    display: flex;
-    align-items: flex-end;
-    flex-shrink: 0;
-    transition: none; // pour ne pas décaler
-  }
-
-  &__check {
-    background-color: $tertiary-color;
-    width: 60px;
-    height: 100%;
-    position: absolute;
-    right: -60px;
-    top: 0;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    transition: transform 0.3s;
-    border-radius: 0 15px 15px 0;
-
-    i {
-      color: white;
-      font-size: 1.2rem;
-    }
-  }
-
-  &:hover .menu-item__check {
-    transform: translateX(-60px);
   }
 }
 
-.menu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 1rem;
-  margin-bottom: 2rem;
-
-  h1 {
-    font-family: $font-secondary;
-    font-size: 28px;
-    margin: 0;
+// Animation d’apparition progressive (optionnelle, à conserver si déjà en place)
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
-
-  .btn-like {
-    margin-left: 1rem;
-    font-size: 22px;
-    position: relative;
-    @include heart-animation;
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
